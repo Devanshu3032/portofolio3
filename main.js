@@ -87,6 +87,32 @@ cards.forEach(card => {
   card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) scale(1)');
 });
 
+// --- EMAILJS FORM LOGIC ---
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const btn = document.querySelector('.btn-send');
+    btn.textContent = 'Sending...';
+
+    // Replace these with your actual IDs from your EmailJS Dashboard
+    const serviceID = 'service_slq7t2v'; 
+    const templateID = 'template_8s7uk8y';
+
+    emailjs.sendForm(serviceID, templateID, this)
+      .then(() => {
+        btn.textContent = 'Send Message';
+        alert('Thank you! Your message has been sent successfully.');
+        contactForm.reset();
+      }, (err) => {
+        btn.textContent = 'Send Message';
+        alert('Failed to send message. Error: ' + JSON.stringify(err));
+      });
+  });
+}
+
+// --- TYPING ANIMATION ---
 const typingElement = document.querySelector('.info-home h3'); 
 const words = ["Frontend Developer", "UI/UX Designer", "Web Enthusiast", "React Developer"];
 let wordIndex = 0;
@@ -95,6 +121,7 @@ let isDeleting = false;
 let typingSpeed = 100;
 
 function type() {
+    if(!typingElement) return;
     const currentWord = words[wordIndex];
     let displayedText = currentWord.substring(0, charIndex);
     
@@ -115,17 +142,17 @@ function type() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', type);
-
+// --- LOADING SCREEN ---
 document.addEventListener("DOMContentLoaded", () => {
+  type(); // Start typing
+  
   const loadingText = document.getElementById("loading-text");
   const mainIcon = document.querySelector(".main-icon");
   const subIcons = document.querySelectorAll(".sub-icons i");
-  const designerText = document.getElementById("designer-text");
-  const mainPage = document.getElementById("main-page");
   const loadingScreen = document.getElementById("loading-screen");
 
   function showElement(element, delay=0){
+    if(!element) return;
     setTimeout(() => {
       element.classList.remove("hidden");
       element.classList.add("fall");
@@ -137,11 +164,11 @@ document.addEventListener("DOMContentLoaded", () => {
   subIcons.forEach((icon, idx) => {
     showElement(icon, 1600 + idx*400);  
   });
-  showElement(designerText, 2800);    
 
   setTimeout(() => {
-    loadingScreen.style.opacity = '0';
-    setTimeout(() => loadingScreen.style.display='none', 500);
-    mainPage.classList.add("visible");
+    if(loadingScreen) {
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => loadingScreen.style.display='none', 500);
+    }
   }, 4000);
 });
