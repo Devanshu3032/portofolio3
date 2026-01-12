@@ -98,7 +98,7 @@ if (contactForm) {
 
     // Replace these with your actual IDs from your EmailJS Dashboard
     const serviceID = 'service_slq7t2v'; 
-    const templateID = 'template_8s7uk8y';
+    const templateID = 'template_7u7asde';
 
     emailjs.sendForm(serviceID, templateID, this)
       .then(() => {
