@@ -97,7 +97,7 @@ if (contactForm) {
     btn.textContent = 'Sending...';
 
     // Replace these with your actual IDs from your EmailJS Dashboard
-    const serviceID = 'service_slq7t2v'; 
+    const serviceID = 'service_8tuxlrm'; 
     const templateID = 'template_7u7asde';
 
     emailjs.sendForm(serviceID, templateID, this)
