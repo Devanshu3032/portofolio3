@@ -194,6 +194,8 @@ header {
   padding: 10px 10px;
   cursor: pointer;
   transition: 0.4s;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .btn-home2:hover{
